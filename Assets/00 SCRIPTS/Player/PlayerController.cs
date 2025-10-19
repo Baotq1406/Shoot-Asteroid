@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,8 +25,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _maxEnergy;
     [SerializeField] private float _energyRegen;
 
+
+    [SerializeField] private float _health;
+    [SerializeField] private float _maxHealth;
+    [SerializeField] private GameObject _destroyEffect;
+
     Rigidbody2D _rigi;
-    [SerializeField] private GameObject _frameBoost;
+    [SerializeField] public GameObject _frameBoost;
     Vector2 _playerDirection;
 
     // Ham Awake duoc goi khi doi tuong duoc khoi tao
@@ -44,44 +48,55 @@ public class PlayerController : MonoBehaviour
 
         if (_frameBoost != null)
             _frameBoost.SetActive(false);
+
     }
 
     // Ham Start duoc goi khi bat dau
     void Start()
     {
         _rigi = GetComponent<Rigidbody2D>();
+
+        // Khoi tao nang luong va mau
         _energy = _maxEnergy;
         UIController.Instance.UpdateEnergySlider(_energy, _maxEnergy);
+
+        _health = _maxHealth;
+        UIController.Instance.UpdateHealthSlider(_health, _maxHealth);
     }
 
     // Update: chi doc input, xu ly ban, boost, nang luong, animation
     void Update()
     {
-        // Doc input huong di chuyen
-        float x = Input.GetAxisRaw("Horizontal");
-        float y = Input.GetAxisRaw("Vertical");
-        _playerDirection = new Vector2(x, y).normalized;
-
-        // Xu ly boost bang phim Shift
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Time.timeScale > 0)
         {
-            EnterBoost(_frameBoost);
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            ExitBoost(_frameBoost);
-        }
+            // Doc input huong di chuyen
+            float x = Input.GetAxisRaw("Horizontal");
+            float y = Input.GetAxisRaw("Vertical");
+            _playerDirection = new Vector2(x, y).normalized;
 
-        // Ban dan voi cooldown
-        if (Input.GetKey(KeyCode.Space) && Time.time >= _nextShootTime)
-        {
-            Shoot();
-            _nextShootTime = Time.time + _fireCooldown;
-        }
+            // Xu ly boost bang phim Shift
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                EnterBoost(_frameBoost);
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                ExitBoost(_frameBoost);
+            }
 
-        // Cap nhat trang thai/animation (dua tren van toc frame truoc)
-        UpdateState();
-        _anim.UpdateAnimation(_playerState);
+            // Ban dan voi cooldown
+            if (Input.GetKey(KeyCode.Space) && Time.time >= _nextShootTime)
+            {
+                Shoot();
+                _nextShootTime = Time.time + _fireCooldown;
+            }
+
+            // Cap nhat trang thai/animation (dua tren van toc frame truoc)
+            UpdateState();
+            _anim.UpdateAnimation(_playerState);
+
+            //Debug.LogError(_health);
+        }
     }
 
     // FixedUpdate: thuc hien di chuyen va gioi han vi tri
@@ -163,6 +178,7 @@ public class PlayerController : MonoBehaviour
     {
         if (gameObject != null && _energy > 10)
         {
+            AudioManager.Instance.PlaySound(AudioManager.Instance.boost);
             gameObject.SetActive(true);
             _boost = _boostPower;
             _isBoosting = true;
@@ -170,7 +186,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Ham thoat tang toc
-    void ExitBoost(GameObject gameObject)
+    public void ExitBoost(GameObject gameObject)
     {
         if (gameObject != null)
             gameObject.SetActive(false);
@@ -179,6 +195,35 @@ public class PlayerController : MonoBehaviour
         _isBoosting = false;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            TakeDamage(1);
+        }
+    }
+
+    // Ham xu ly khi nguoi choi bi trung dan hoac vat the
+    private void TakeDamage(int damage)
+    {
+        _health -= damage;
+        UIController.Instance.UpdateHealthSlider(_health, _maxHealth);
+        AudioManager.Instance.PlaySound(AudioManager.Instance.hit);
+
+        // Kiem tra neu nguoi choi het mau
+        if (_health <= 0)
+        {
+            // Xy ly khi nguoi choi chet
+            //Debug.Log("Player Dead!");
+
+            // Reset boost neu dang boost
+            _boost = 0f;
+            gameObject.SetActive(false);
+            Instantiate(_destroyEffect, transform.position, transform.rotation);
+            GameManager.Instance.GameOver();
+            AudioManager.Instance.PlaySound(AudioManager.Instance.dead);
+        }
+    }
     // Trang thai nguoi choi
     public enum PlayerState
     {

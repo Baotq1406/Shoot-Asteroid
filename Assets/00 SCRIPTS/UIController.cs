@@ -11,6 +11,11 @@ public class UIController : MonoBehaviour
     [SerializeField] private Slider _energySlider;
     [SerializeField] private TMP_Text _energyText;
 
+    [SerializeField] private Slider _healthSlider;
+    [SerializeField] private TMP_Text _healthText;
+
+    public GameObject pausePanel;
+
     public void Awake()
     {
         if (Instance == null)
@@ -26,8 +31,17 @@ public class UIController : MonoBehaviour
     // cap nhat UI energy
     public void UpdateEnergySlider(float current, float max) 
     {
-        _energySlider.value = Mathf.RoundToInt(current);
         _energySlider.maxValue = max;
+        _energySlider.value = Mathf.RoundToInt(current);
         _energyText.text = _energySlider.value + "/" + _energySlider.maxValue;
+    }
+
+    // cap nhat UI health
+    public void UpdateHealthSlider(float current, float max)
+    {
+        _healthSlider.maxValue = max;
+        _healthSlider.value = Mathf.RoundToInt(current);
+        _healthText.text = _healthSlider.value + "/" + _healthSlider.maxValue;
+        //Debug.Log("lan 2" + _healthSlider.value);
     }
 }
