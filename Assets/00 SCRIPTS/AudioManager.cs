@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource destroyAsteroid;
     public AudioSource hitRock;
     public AudioSource shoot;
+    public AudioSource score;
 
     private void Awake()
     {

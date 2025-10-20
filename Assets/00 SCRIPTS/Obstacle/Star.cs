@@ -21,6 +21,7 @@ public class Star : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerController.Instance.score++;
+            AudioManager.Instance.PlaySound(AudioManager.Instance.score);
             if (PlayerController.Instance.score > 999)
             {
                 PlayerController.Instance.score = 999;
