@@ -11,6 +11,9 @@ public class AudioManager : MonoBehaviour
     public AudioSource hit;
     public AudioSource pause;
     public AudioSource unPause;
+    public AudioSource destroyAsteroid;
+    public AudioSource hitRock;
+    public AudioSource shoot;
 
     private void Awake()
     {

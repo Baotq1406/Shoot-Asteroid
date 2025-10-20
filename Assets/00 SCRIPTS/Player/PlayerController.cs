@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float _health;
     [SerializeField] private float _maxHealth;
+
+    private int _score;
+    public int score { get { return _score; } set { _score = value; } }
+
     [SerializeField] private GameObject _destroyEffect;
 
     Rigidbody2D _rigi;
@@ -62,6 +66,9 @@ public class PlayerController : MonoBehaviour
 
         _health = _maxHealth;
         UIController.Instance.UpdateHealthSlider(_health, _maxHealth);
+
+        _score = 0;
+        UIController.Instance.UpdateScoreText(_score);
     }
 
     // Update: chi doc input, xu ly ban, boost, nang luong, animation
@@ -170,6 +177,8 @@ public class PlayerController : MonoBehaviour
             return;
 
         GameObject bullet01 = Instantiate(_playerBulletPrefab);
+        AudioManager.Instance.PlaySound(AudioManager.Instance.shoot);
+
         bullet01.transform.position = _bulletPosition.transform.position;
     }
 
@@ -199,6 +208,10 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
+            _score--;
+            if (_score < 0)
+                _score = 0;
+            UIController.Instance.UpdateScoreText(_score);
             TakeDamage(1);
         }
     }
@@ -209,6 +222,8 @@ public class PlayerController : MonoBehaviour
         _health -= damage;
         UIController.Instance.UpdateHealthSlider(_health, _maxHealth);
         AudioManager.Instance.PlaySound(AudioManager.Instance.hit);
+
+        AnimationController.Instance.FlashDamage();
 
         // Kiem tra neu nguoi choi het mau
         if (_health <= 0)

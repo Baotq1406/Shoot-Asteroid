@@ -33,4 +33,13 @@ public class PlayerBullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Neu vien dan va cham voi doi tuong co tag la "Obstacle" thi huy no
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            Destroy(gameObject);
+        }
+    }
 }

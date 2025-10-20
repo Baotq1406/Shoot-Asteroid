@@ -5,11 +5,31 @@ using PlayerState = PlayerController.PlayerState;
 
 public class AnimationController : MonoBehaviour
 {
-    Animator _anim;
-    // Start is called before the first frame update
+    public static AnimationController Instance;
+
+    private Animator _anim;
+    private SpriteRenderer _spriteRenderer;
+
+    private Material _defaultMaterial;
+    [SerializeField] private Material _flashMaterial;
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         _anim = this.GetComponent<Animator>();
+        _spriteRenderer = this.GetComponent<SpriteRenderer>();
+        _defaultMaterial =  _spriteRenderer.material;
     }
 
     // Update is called once per frame
@@ -33,5 +53,17 @@ public class AnimationController : MonoBehaviour
                 _anim.SetBool(stateName, false);
             }
         }
+    }
+
+    public void FlashDamage()
+    {
+        _spriteRenderer.material = _flashMaterial;
+        StartCoroutine(ResetMaterial());
+    }
+
+    private IEnumerator ResetMaterial()
+    {
+        yield return new WaitForSeconds(0.2f);
+        _spriteRenderer.material = _defaultMaterial;
     }
 }

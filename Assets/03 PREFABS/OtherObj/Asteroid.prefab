@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2497216561350199853}
   - component: {fileID: 1756330904709174075}
   - component: {fileID: 2173163132080963728}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Asteroid
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -53,6 +53,9 @@ MonoBehaviour:
   - {fileID: 1742872981, guid: cc678e7ca2874bd4fb2cd5718d141a02, type: 3}
   - {fileID: 1993535634, guid: cc678e7ca2874bd4fb2cd5718d141a02, type: 3}
   - {fileID: 1184319548, guid: cc678e7ca2874bd4fb2cd5718d141a02, type: 3}
+  _flashMaterial: {fileID: 2100000, guid: 084806b2d312c8043b6c6b762c16c189, type: 2}
+  _destroyEffect: {fileID: 5130809719379203271, guid: e91a0c3c0b6a60b4c9ae080df37b800b, type: 3}
+  _lives: 5
 --- !u!212 &2497216561350199853
 SpriteRenderer:
   m_ObjectHideFlags: 0

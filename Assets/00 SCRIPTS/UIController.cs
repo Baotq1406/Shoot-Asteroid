@@ -14,6 +14,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private Slider _healthSlider;
     [SerializeField] private TMP_Text _healthText;
 
+    [SerializeField] private TMP_Text _scoreText;
+
     public GameObject pausePanel;
 
     public void Awake()
@@ -43,5 +45,11 @@ public class UIController : MonoBehaviour
         _healthSlider.value = Mathf.RoundToInt(current);
         _healthText.text = _healthSlider.value + "/" + _healthSlider.maxValue;
         //Debug.Log("lan 2" + _healthSlider.value);
+    }
+
+    // cap nhat UI score
+    public void UpdateScoreText(int currentScore)
+    {
+        _scoreText.text = "Score: " + currentScore;
     }
 }
