@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
 
         _score = 0;
         UIController.Instance.UpdateScoreText(_score);
+
     }
 
     // Update: chi doc input, xu ly ban, boost, nang luong, animation
