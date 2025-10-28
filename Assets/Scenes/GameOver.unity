@@ -892,7 +892,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 185626691276815126, guid: ec84feb27a611b245b5f863c302db80b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: NewGame
+      value: PlayAgain
       objectReference: {fileID: 0}
     - target: {fileID: 185626691276815126, guid: ec84feb27a611b245b5f863c302db80b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -6616,6 +6616,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca5c6e6146d46c043917678bd52bf3af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guidePanel01: {fileID: 0}
+  guidePanel02: {fileID: 0}
 --- !u!4 &1754275085
 Transform:
   m_ObjectHideFlags: 0
@@ -6657,7 +6659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 185626691276815126, guid: ec84feb27a611b245b5f863c302db80b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: QuitGame
+      value: QuitGameOverGame
       objectReference: {fileID: 0}
     - target: {fileID: 185626691276815126, guid: ec84feb27a611b245b5f863c302db80b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

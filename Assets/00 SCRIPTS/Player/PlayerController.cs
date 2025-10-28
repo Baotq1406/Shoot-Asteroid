@@ -218,7 +218,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Ham xu ly khi nguoi choi bi trung dan hoac vat the
-    private void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         _health -= damage;
         UIController.Instance.UpdateHealthSlider(_health, _maxHealth);

@@ -970,7 +970,17 @@ MonoBehaviour:
   - prefab: {fileID: 1996871159558983554, guid: 428096deadab6ce409c37bfdfa8ea639, type: 3}
     spawnTimer: 0
     _spawnInterval: 1
-    objectsPerWave: 8
+    objectsPerWave: 10
+    spawnedObjectsCount: 0
+  - prefab: {fileID: 2623168952094607867, guid: f40742e6e5803fe4abc16d12a358827b, type: 3}
+    spawnTimer: 0
+    _spawnInterval: 1
+    objectsPerWave: 2
+    spawnedObjectsCount: 0
+  - prefab: {fileID: 1996871159558983554, guid: 428096deadab6ce409c37bfdfa8ea639, type: 3}
+    spawnTimer: 0
+    _spawnInterval: 1
+    objectsPerWave: 5
     spawnedObjectsCount: 0
   - prefab: {fileID: 604829882353707738, guid: 43ac4c11f0769884b85ebee40cadedcc, type: 3}
     spawnTimer: 0

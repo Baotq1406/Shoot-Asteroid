@@ -15,8 +15,13 @@ public class MenuManager : MonoBehaviour
     
     public void NewGame()
     {
-        if (!guidePanel01.activeSelf & !guidePanel02.activeSelf)
+        if (!guidePanel01.activeSelf & !guidePanel02.activeSelf) 
             SceneManager.LoadScene("Level1");
+    }
+
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene("Level1");
     }
 
     public void GuideGame()
@@ -44,7 +49,12 @@ public class MenuManager : MonoBehaviour
 
     public void QuitGame()
     {
-        if (guidePanel01 == null & guidePanel02 == null)
+        if (!guidePanel01.activeSelf & !guidePanel02.activeSelf)
             Application.Quit();
+    }
+
+    public void QuitGameOverGame()
+    {
+        Application.Quit();
     }
 }
