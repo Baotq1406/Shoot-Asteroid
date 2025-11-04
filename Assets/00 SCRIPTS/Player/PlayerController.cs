@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float _moveSpeed = 0.5f;
 
-    [SerializeField] GameObject _playerBulletPrefab;
+    //[SerializeField] GameObject _playerBulletPrefab;
     [SerializeField] GameObject _bulletPosition;
     [SerializeField] private float _fireCooldown = 0.25f; // co the chinh trong Inspector
     private float _nextShootTime = 0f; // thoi diem co the ban tiep theo
@@ -174,13 +174,13 @@ public class PlayerController : MonoBehaviour
     // Ham ban dan
     void Shoot()
     {
-        if (_playerBulletPrefab == null || _bulletPosition == null)
-            return;
-
-        GameObject bullet01 = Instantiate(_playerBulletPrefab);
-        AudioManager.Instance.PlaySound(AudioManager.Instance.shoot);
-
+        // Tao vien dan tai vi tri dau dan
+        GameObject bullet01 = BulletPool.Instance.GetBullet();
         bullet01.transform.position = _bulletPosition.transform.position;
+        bullet01.SetActive(true);
+
+        //GameObject bullet01 = Instantiate(_playerBulletPrefab);
+        AudioManager.Instance.PlaySound(AudioManager.Instance.shoot);
     }
 
     // Ham tang toc
@@ -223,7 +223,6 @@ public class PlayerController : MonoBehaviour
         _health -= damage;
         UIController.Instance.UpdateHealthSlider(_health, _maxHealth);
         AudioManager.Instance.PlaySound(AudioManager.Instance.hit);
-
         AnimationController.Instance.FlashDamage();
 
         // Kiem tra neu nguoi choi het mau

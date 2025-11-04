@@ -10,6 +10,8 @@ public class ObjectSpawner : MonoBehaviour
     [SerializeField] private int _waveNumber;
     [SerializeField] private List<Wave> _waves;
 
+    [SerializeField] GameObject _player;
+
     [System.Serializable]
     public class Wave
     {

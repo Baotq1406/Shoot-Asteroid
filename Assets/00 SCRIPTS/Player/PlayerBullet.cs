@@ -6,12 +6,8 @@ public class PlayerBullet : MonoBehaviour
 {
     [SerializeField] float speedBullet = 8f;
 
-    // Su dung cho khoi tao
-    void Start()
-    {
 
-    }
-
+    
     // Cap nhat duoc goi moi khung hinh
     void Update()
     {
@@ -30,7 +26,8 @@ public class PlayerBullet : MonoBehaviour
         // Neu vien dan di ra ngoai man hinh o tren thi huy no
         if (transform.position.y > max.y)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 
@@ -39,7 +36,8 @@ public class PlayerBullet : MonoBehaviour
         // Neu vien dan va cham voi doi tuong co tag la "Obstacle" thi huy no
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 }

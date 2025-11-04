@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Star : MonoBehaviour
 {
-
     void Update()
     {
         float moveY = (GameManager.Instance.worldSpeed * PlayerController.Instance.boost) * Time.deltaTime;
@@ -22,6 +21,7 @@ public class Star : MonoBehaviour
         {
             PlayerController.Instance.score++;
             AudioManager.Instance.PlaySound(AudioManager.Instance.score);
+            // Gioi han diem so toi da la 999
             if (PlayerController.Instance.score > 999)
             {
                 PlayerController.Instance.score = 999;
