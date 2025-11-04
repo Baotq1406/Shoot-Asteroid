@@ -17,7 +17,8 @@ public class Star : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        // Xu ly khi nguoi choi va cham voi ngoi sao
+        if (collision.gameObject.CompareTag(CONSTANT.TAG_PLAYER))
         {
             PlayerController.Instance.score++;
             AudioManager.Instance.PlaySound(AudioManager.Instance.score);

@@ -6,8 +6,6 @@ public class PlayerBullet : MonoBehaviour
 {
     [SerializeField] float speedBullet = 8f;
 
-
-    
     // Cap nhat duoc goi moi khung hinh
     void Update()
     {
@@ -34,7 +32,7 @@ public class PlayerBullet : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Neu vien dan va cham voi doi tuong co tag la "Obstacle" thi huy no
-        if (collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag(CONSTANT.TAG_OBSTACLE))
         {
             //Destroy(gameObject);
             this.gameObject.SetActive(false);

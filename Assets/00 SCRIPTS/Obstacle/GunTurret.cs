@@ -21,7 +21,7 @@ public class GunTurret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject player = GameObject.FindGameObjectWithTag(CONSTANT.TAG_PLAYER);
         if (player == null)
             return;
 
@@ -44,7 +44,7 @@ public class GunTurret : MonoBehaviour
         // Neu raycast cham vao nguoi choi
         if (rayInfo)
         {
-            if (rayInfo.collider.CompareTag("Player"))
+            if (rayInfo.collider.CompareTag(CONSTANT.TAG_PLAYER))
             {
                 // Kich hoat ban
                 if (!_deteched)

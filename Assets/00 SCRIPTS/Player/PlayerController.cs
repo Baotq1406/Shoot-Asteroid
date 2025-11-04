@@ -207,7 +207,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Obstacle"))
+        // Xu ly khi nguoi choi va cham voi vat the
+        if (collision.gameObject.CompareTag(CONSTANT.TAG_OBSTACLE))
         {
             _score--;
             if (_score < 0)

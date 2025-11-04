@@ -48,7 +48,8 @@ public class Asteroid : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Bullet"))
+        // Xu ly khi nguoi choi va cham voi vat the
+        if (collision.gameObject.CompareTag(CONSTANT.TAG_PLAYER) || collision.gameObject.CompareTag(CONSTANT.TAG_BULLET))
         {
             _spriteRenderer.material = _flashMaterial;
             StartCoroutine(ResetMaterial());

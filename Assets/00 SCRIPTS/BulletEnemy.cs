@@ -25,12 +25,12 @@ public class BulletEnemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag(CONSTANT.TAG_OBSTACLE))
         {
             Destroy(gameObject);
         }
 
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag(CONSTANT.TAG_PLAYER))
         {
             PlayerController.Instance.TakeDamage(1);
             Destroy(gameObject);
